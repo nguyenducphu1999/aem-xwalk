@@ -50,7 +50,12 @@
         "hero",
         "cards",
         "columns",
-        "fragment"
+        "fragment",
+        "carousel",
+        "category-tiles",
+        "product-carousel",
+        "promo-banner",
+        "tabs"
       ]
     }
   ]

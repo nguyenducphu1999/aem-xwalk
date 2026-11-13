@@ -1,0 +1,71 @@
+{
+  "definitions": [
+    {
+      "title": "Category Tiles",
+      "id": "category-tiles",
+      "plugins": {
+        "xwalk": {
+          "page": {
+            "resourceType": "core/franklin/components/block/v1/block",
+            "template": {
+              "name": "Category Tiles",
+              "filter": "category-tiles"
+            }
+          }
+        }
+      }
+    },
+    {
+      "title": "Category Tile",
+      "id": "category-tile",
+      "plugins": {
+        "xwalk": {
+          "page": {
+            "resourceType": "core/franklin/components/block/v1/block/item",
+            "template": {
+              "name": "Category Tile",
+              "model": "category-tile"
+            }
+          }
+        }
+      }
+    }
+  ],
+  "models": [
+    {
+      "id": "category-tile",
+      "fields": [
+        {
+          "component": "reference",
+          "valueType": "string",
+          "name": "image",
+          "label": "Icon",
+          "multi": false
+        },
+        {
+          "component": "text",
+          "valueType": "string",
+          "name": "imageAlt",
+          "label": "Icon alt",
+          "value": ""
+        },
+        {
+          "component": "richtext",
+          "name": "text",
+          "value": "",
+          "label": "Label (link)",
+          "valueType": "string",
+          "description": "Tên danh mục dạng link, ví dụ: Tivi"
+        }
+      ]
+    }
+  ],
+  "filters": [
+    {
+      "id": "category-tiles",
+      "components": [
+        "category-tile"
+      ]
+    }
+  ]
+}
