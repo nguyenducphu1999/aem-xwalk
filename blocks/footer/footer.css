@@ -1,20 +1,214 @@
+/* LG-style footer v2 (mở file này trên site để kiểm tra đã deploy: dòng đầu phải là chữ "LG-style footer v2") */
+
 footer {
-  background-color: var(--light-color);
-  font-size: var(--body-font-size-xs);
-}
+  --lg-max: var(--layout-max-width, 1200px);
+  --lg-gutter: var(--gutter, 16px);
+  --lg-bg: #262626;
+  --lg-title: #fff;
+  --lg-link: #b8b8b8;
+  --lg-line: #444;
 
-footer .footer > div {
-  margin: auto;
-  max-width: 1200px;
-  padding: 40px 24px 24px;
-}
-
-footer .footer p {
-  margin: 0;
+  margin-top: 64px;
+  border-radius: var(--radius-l, 28px) var(--radius-l, 28px) 0 0;
+  background: var(--lg-bg);
+  color: var(--lg-link);
+  font-family: var(--body-font-family, Roboto, Arial, sans-serif);
+  font-size: 14px;
+  line-height: 1.5;
 }
 
 @media (width >= 900px) {
-  footer .footer > div {
-    padding: 40px 32px 24px;
+  footer {
+    --lg-gutter: 32px;
+  }
+}
+
+footer .footer .footer-links,
+footer .footer .footer-legal {
+  box-sizing: border-box;
+  max-width: var(--lg-max);
+  margin: 0 auto;
+  padding-right: var(--lg-gutter);
+  padding-left: var(--lg-gutter);
+}
+
+footer .footer .default-content-wrapper {
+  max-width: none;
+  margin: 0;
+  padding: 0;
+}
+
+footer .footer ul {
+  margin: 0;
+  padding: 0;
+  list-style: none;
+}
+
+footer .footer a:any-link {
+  color: var(--lg-link);
+  text-decoration: none;
+  transition: color 0.15s;
+}
+
+footer .footer a:hover {
+  color: #fff;
+  text-decoration: underline;
+}
+
+/* ---------- cột link (mobile: accordion) ---------- */
+footer .footer-links .default-content-wrapper > ul > li {
+  border-bottom: 1px solid var(--lg-line);
+}
+
+footer .footer-col-title {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  width: 100%;
+  margin: 0;
+  padding: 18px 0;
+  border: 0;
+  background: none;
+  color: var(--lg-title);
+  font-family: inherit;
+  font-size: 15px;
+  font-weight: 700;
+  text-align: left;
+  cursor: pointer;
+}
+
+footer .footer-col-title::after {
+  width: 8px;
+  height: 8px;
+  border: solid currentcolor;
+  border-width: 0 2px 2px 0;
+  content: '';
+  transform: rotate(45deg);
+  transition: transform 0.2s;
+}
+
+footer .footer-col-title[aria-expanded='true']::after {
+  transform: rotate(-135deg);
+}
+
+footer .footer-links li > ul {
+  display: none;
+  padding: 0 0 16px;
+}
+
+footer .footer-links li.open > ul {
+  display: block;
+}
+
+footer .footer-links li li {
+  padding: 6px 0;
+}
+
+/* ---------- phần dưới ---------- */
+footer .footer-legal {
+  padding-top: 24px;
+  padding-bottom: 32px;
+  font-size: 13px;
+}
+
+footer .footer-legal .default-content-wrapper {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+}
+
+footer .footer-legal p {
+  margin: 0;
+}
+
+footer .footer-social {
+  display: flex;
+  order: -1;
+  gap: 12px;
+  margin-bottom: 8px;
+}
+
+footer .footer .footer-social-link {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  width: 40px;
+  height: 40px;
+  border: 1px solid #666;
+  border-radius: 50%;
+  color: #fff;
+  text-decoration: none;
+  transition: background 0.15s, border-color 0.15s;
+}
+
+footer .footer .footer-social-link:any-link {
+  color: #fff;
+}
+
+footer .footer .footer-social-link:hover {
+  border-color: #fff;
+  background: #fff;
+  color: var(--lg-bg);
+  text-decoration: none;
+}
+
+footer .footer-social-letter {
+  font-size: 15px;
+  font-weight: 700;
+}
+
+/* ---------- desktop ---------- */
+@media (width >= 900px) {
+  footer .footer-links .default-content-wrapper > ul {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(180px, 1fr));
+    gap: 40px 32px;
+    padding: 64px 0 48px;
+  }
+
+  footer .footer-links .default-content-wrapper > ul > li {
+    border-bottom: 0;
+  }
+
+  footer .footer-col-title {
+    padding: 0 0 16px;
+    cursor: default;
+  }
+
+  footer .footer-col-title::after {
+    display: none;
+  }
+
+  footer .footer-links li > ul {
+    display: block;
+    padding: 0;
+  }
+
+  footer .footer-links li li {
+    padding: 5px 0;
+    font-size: 13px;
+  }
+
+  footer .footer-legal {
+    border-top: 1px solid var(--lg-line);
+  }
+
+  /* trái: bản quyền + điều khoản, phải: icon mạng xã hội */
+  footer .footer-legal .default-content-wrapper {
+    display: grid;
+    grid-template-columns: 1fr auto;
+    align-items: center;
+    gap: 6px 24px;
+    padding-top: 8px;
+  }
+
+  footer .footer-legal .default-content-wrapper > p {
+    grid-column: 1;
+  }
+
+  footer .footer-social {
+    grid-column: 2;
+    grid-row: 1 / span 2;
+    margin: 0;
   }
 }

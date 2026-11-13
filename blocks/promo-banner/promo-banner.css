@@ -1,0 +1,143 @@
+/* Promo banner v2 - góc bo lớn, ảnh phóng nhẹ khi rê chuột, lớp tối giúp chữ dễ đọc */
+
+.promo-banner {
+  --pb-radius: var(--radius-l, 28px);
+
+  display: grid;
+  gap: 16px;
+}
+
+.promo-banner .promo-item {
+  position: relative;
+  isolation: isolate;
+  display: flex;
+  min-height: 240px;
+  overflow: hidden;
+  border-radius: var(--pb-radius);
+  background: #f2f2f4;
+  box-shadow: 0 1px 3px rgb(0 0 0 / 6%), 0 8px 24px rgb(0 0 0 / 6%);
+}
+
+.promo-banner .promo-image,
+.promo-banner .promo-image picture,
+.promo-banner .promo-image img {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+}
+
+.promo-banner .promo-image img {
+  object-fit: cover;
+  transition: transform 0.6s;
+}
+
+.promo-banner .promo-item:hover .promo-image img {
+  transform: scale(1.04);
+}
+
+.promo-banner .promo-content {
+  position: relative;
+  z-index: 1;
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-end;
+  align-items: flex-start;
+  padding: 24px;
+}
+
+.promo-banner .promo-content h2,
+.promo-banner .promo-content h3 {
+  margin: 0 0 6px;
+  font-size: 24px;
+  letter-spacing: -0.01em;
+  line-height: 1.18;
+  text-align: left;
+}
+
+.promo-banner .promo-content p {
+  margin: 0;
+  font-size: 15px;
+  line-height: 1.45;
+}
+
+.promo-banner .promo-content p.button-container {
+  margin-top: 14px;
+}
+
+/* ảnh nền tối: chữ trắng + lớp tối phía dưới */
+.promo-banner.dark .promo-item::after,
+.dark .promo-banner .promo-item::after {
+  position: absolute;
+  inset: 0;
+  z-index: 0;
+  background: linear-gradient(to top, rgb(0 0 0 / 55%), transparent 65%);
+  content: '';
+}
+
+.promo-banner.dark .promo-content,
+.dark .promo-banner .promo-content {
+  color: #fff;
+}
+
+.promo-banner .promo-content a.button:any-link {
+  display: inline-block;
+  margin: 0;
+  padding: 0.55em 1.4em;
+  border: 1px solid var(--brand-color, #a50034);
+  border-radius: 999px;
+  background: var(--brand-color, #a50034);
+  color: #fff;
+  font-size: 14px;
+  font-weight: 600;
+  text-decoration: none;
+  transition: background 0.2s, color 0.2s, transform 0.2s;
+}
+
+.promo-banner .promo-content a.button.secondary:any-link {
+  border-color: currentcolor;
+  background: transparent;
+  color: inherit;
+}
+
+.promo-banner .promo-content a.button:hover {
+  transform: scale(1.03);
+}
+
+.promo-banner.promo-banner-1 .promo-item {
+  min-height: 280px;
+}
+
+@media (width >= 900px) {
+  .promo-banner.promo-banner-2 {
+    grid-template-columns: repeat(2, 1fr);
+  }
+
+  .promo-banner.promo-banner-3 {
+    grid-template-columns: repeat(3, 1fr);
+  }
+
+  .promo-banner .promo-item {
+    min-height: 320px;
+  }
+
+  .promo-banner .promo-content {
+    padding: 36px;
+  }
+
+  .promo-banner .promo-content h2,
+  .promo-banner .promo-content h3 {
+    font-size: 28px;
+  }
+
+  .promo-banner.promo-banner-1 .promo-item {
+    min-height: 380px;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .promo-banner .promo-image img,
+  .promo-banner .promo-content a.button {
+    transition: none;
+  }
+}

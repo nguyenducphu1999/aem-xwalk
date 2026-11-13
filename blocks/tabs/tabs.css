@@ -1,0 +1,65 @@
+/* Tabs v2 - nhóm tab dạng viên thuốc (segmented control) */
+
+.tabs {
+  display: flex;
+  flex-direction: column;
+  align-items: stretch;
+}
+
+.tabs .tabs-list {
+  display: flex;
+  align-self: flex-start;
+  gap: 4px;
+  max-width: 100%;
+  margin-bottom: 24px;
+  padding: 4px;
+  overflow-x: auto;
+  border-radius: 999px;
+  background: rgb(0 0 0 / 6%);
+  scrollbar-width: none;
+}
+
+.tabs .tabs-list::-webkit-scrollbar {
+  display: none;
+}
+
+.tabs .tabs-tab {
+  flex: 0 0 auto;
+  margin: 0;
+  padding: 10px 22px;
+  border: 0;
+  border-radius: 999px;
+  background: transparent;
+  color: #6e6e73;
+  font-family: inherit;
+  font-size: 15px;
+  font-weight: 600;
+  line-height: 1.2;
+  cursor: pointer;
+  transition: background 0.2s, color 0.2s, box-shadow 0.2s;
+}
+
+.tabs .tabs-tab:hover {
+  color: #1d1d1f;
+}
+
+.tabs .tabs-tab[aria-selected='true'] {
+  background: #fff;
+  box-shadow: 0 1px 3px rgb(0 0 0 / 12%), 0 2px 8px rgb(0 0 0 / 6%);
+  color: #1d1d1f;
+}
+
+.tabs .tabs-tab:focus-visible {
+  outline: 2px solid var(--brand-color, #a50034);
+  outline-offset: 2px;
+}
+
+.tabs .tabs-panel[hidden] {
+  display: none;
+}
+
+@media (width >= 900px) {
+  .tabs .tabs-list {
+    align-self: center;
+  }
+}

@@ -1,0 +1,392 @@
+/* Product carousel v3 - thẻ sản phẩm kiểu LG: nhãn, tên 2 dòng, mã + sao, ảnh lớn, khối giá, nút Mua ngay */
+
+.product-carousel {
+  --pc-radius: var(--radius-m, 24px);
+  --pc-cta: var(--cta-color, #ea1917);
+
+  position: relative;
+}
+
+.product-carousel .product-carousel-track {
+  display: flex;
+  gap: 16px;
+  margin: 0;
+  padding: 4px 2px 24px;
+  overflow-x: auto;
+  list-style: none;
+  scroll-snap-type: x mandatory;
+  scrollbar-width: none;
+}
+
+.product-carousel .product-carousel-track::-webkit-scrollbar {
+  display: none;
+}
+
+.product-carousel .product-card {
+  display: flex;
+  flex: 0 0 82%;
+  flex-direction: column;
+  box-sizing: border-box;
+  padding: 20px;
+  border-radius: var(--pc-radius);
+  background: #fff;
+  scroll-snap-align: start;
+  transition: transform 0.25s, box-shadow 0.25s;
+}
+
+.product-carousel .product-card.is-clickable {
+  cursor: pointer;
+}
+
+.product-carousel .product-card:hover {
+  box-shadow: 0 12px 32px rgb(0 0 0 / 10%);
+  transform: translateY(-3px);
+}
+
+/* nhãn (Mới...) */
+.product-carousel .pc-badge-row {
+  margin: 0;
+}
+
+.product-carousel.has-badge .pc-badge-row {
+  min-height: 30px;
+  margin-bottom: 8px;
+}
+
+.product-carousel .pc-badge {
+  display: inline-block;
+  padding: 1px 10px;
+  border: 1px solid var(--pc-cta);
+  border-radius: 6px;
+  color: var(--pc-cta);
+  font-size: 14px;
+  font-weight: 700;
+  line-height: 1.5;
+}
+
+/* tên sản phẩm: tối đa 2 dòng */
+.product-carousel .pc-title {
+  display: -webkit-box;
+  min-height: 2.8em;
+  margin: 0 0 10px;
+  overflow: hidden;
+  color: #1d1d1f;
+  font-size: 18px;
+  font-weight: 400;
+  letter-spacing: -0.005em;
+  line-height: 1.4;
+  -webkit-box-orient: vertical;
+  -webkit-line-clamp: 2;
+}
+
+/* mã sản phẩm + đánh giá */
+.product-carousel .pc-meta {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  gap: 8px;
+  color: #555;
+  font-size: 13px;
+}
+
+.product-carousel.has-meta .pc-meta {
+  min-height: 22px;
+}
+
+.product-carousel .pc-model {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+}
+
+.product-carousel .pc-copy {
+  display: grid;
+  place-items: center;
+  width: 22px;
+  height: 22px;
+  margin: 0;
+  padding: 0;
+  border: 0;
+  border-radius: 6px;
+  background: none;
+  color: #555;
+  cursor: pointer;
+  transition: background 0.2s, color 0.2s;
+}
+
+.product-carousel .pc-copy:hover {
+  background: #f0f0f0;
+  color: #000;
+}
+
+.product-carousel .pc-copy.copied {
+  color: #1a8f3c;
+}
+
+.product-carousel .pc-rating {
+  display: inline-flex;
+  align-items: center;
+  gap: 4px;
+  white-space: nowrap;
+}
+
+/* sao: tô màu theo phần trăm điểm đánh giá (--r từ 0 đến 5) */
+.product-carousel .pc-stars {
+  background: linear-gradient(90deg, #f5b301 calc(var(--r, 0) / 5 * 100%), #c8c8c8 0);
+  -webkit-background-clip: text;
+  background-clip: text;
+  color: transparent;
+  font-size: 15px;
+  letter-spacing: 1px;
+  line-height: 1;
+  -webkit-text-fill-color: transparent;
+}
+
+/* ảnh */
+.product-carousel .pc-media {
+  display: flex;
+  flex: 1;
+  justify-content: center;
+  align-items: center;
+  min-height: 200px;
+  margin: 12px 0;
+}
+
+.product-carousel .pc-media picture {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  width: 100%;
+  height: 100%;
+}
+
+.product-carousel .pc-media img {
+  width: auto;
+  max-width: 100%;
+  height: auto;
+  max-height: 240px;
+  border-radius: 0;
+  object-fit: contain;
+  transition: transform 0.4s;
+}
+
+.product-carousel .product-card:hover .pc-media img {
+  transform: scale(1.03);
+}
+
+/* khối giá */
+.product-carousel .pc-discount {
+  color: var(--pc-cta);
+  font-size: 14px;
+  font-weight: 700;
+  line-height: 1.4;
+}
+
+.product-carousel.has-discount .pc-discount {
+  min-height: 20px;
+}
+
+.product-carousel .pc-price-row {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: baseline;
+  gap: 2px 8px;
+}
+
+.product-carousel .pc-price {
+  color: #000;
+  font-size: 24px;
+  font-weight: 700;
+  letter-spacing: -0.01em;
+  line-height: 1.25;
+}
+
+.product-carousel .pc-old {
+  color: #777;
+  font-size: 15px;
+}
+
+.product-carousel .pc-member {
+  margin-top: 2px;
+  color: #000;
+  font-size: 14px;
+  line-height: 1.4;
+}
+
+.product-carousel.has-member .pc-member {
+  min-height: 20px;
+}
+
+.product-carousel .pc-member strong {
+  font-weight: 700;
+}
+
+.product-carousel .pc-installment {
+  margin-top: 6px;
+  color: #555;
+  font-size: 12px;
+  line-height: 1.4;
+  text-decoration: underline;
+  text-underline-offset: 2px;
+}
+
+.product-carousel.has-installment .pc-installment {
+  min-height: 34px;
+}
+
+.product-carousel .pc-note {
+  margin-top: 6px;
+  color: #6e6e73;
+  font-size: 14px;
+}
+
+/* hành động: Tìm hiểu thêm + Mua ngay */
+.product-carousel .pc-actions {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  gap: 16px;
+  margin-top: 16px;
+}
+
+.product-carousel .pc-learn:any-link {
+  color: #000;
+  font-size: 15px;
+  text-decoration: none;
+  white-space: nowrap;
+}
+
+.product-carousel .pc-learn::after {
+  display: inline-block;
+  width: 6px;
+  height: 6px;
+  margin: 0 2px 1px 6px;
+  border: solid currentcolor;
+  border-width: 0 1.5px 1.5px 0;
+  content: '';
+  transform: rotate(-45deg);
+  transition: transform 0.2s;
+}
+
+.product-carousel .pc-learn:hover {
+  text-decoration: underline;
+}
+
+.product-carousel .pc-learn:hover::after {
+  transform: translateX(2px) rotate(-45deg);
+}
+
+.product-carousel .pc-buy:any-link {
+  flex: 1;
+  box-sizing: border-box;
+  min-width: 0;
+  padding: 0.85em 1em;
+  border-radius: 14px;
+  background: var(--pc-cta);
+  color: #fff;
+  font-size: 15px;
+  font-weight: 700;
+  line-height: 1.2;
+  text-align: center;
+  text-decoration: none;
+  transition: filter 0.2s, transform 0.2s;
+}
+
+.product-carousel .pc-buy:hover {
+  filter: brightness(0.92);
+  transform: scale(1.02);
+}
+
+/* nút điều hướng: chỉ hiện trên desktop */
+.product-carousel .product-carousel-prev,
+.product-carousel .product-carousel-next {
+  display: none;
+}
+
+@media (width >= 600px) {
+  .product-carousel .product-card {
+    flex-basis: calc((100% - 16px) / 2.1);
+  }
+}
+
+@media (width >= 900px) {
+  .product-carousel .product-carousel-track {
+    gap: 24px;
+  }
+
+  .product-carousel .product-card {
+    flex-basis: calc((100% - 48px) / 3);
+  }
+
+  .product-carousel .product-carousel-prev,
+  .product-carousel .product-carousel-next {
+    position: absolute;
+    top: 42%;
+    z-index: 2;
+    display: block;
+    width: 44px;
+    height: 44px;
+    padding: 0;
+    border: 0;
+    border-radius: 50%;
+    background: rgb(255 255 255 / 85%);
+    box-shadow: 0 2px 14px rgb(0 0 0 / 18%);
+    cursor: pointer;
+    transition: opacity 0.2s, transform 0.2s;
+    -webkit-backdrop-filter: blur(14px);
+    backdrop-filter: blur(14px);
+  }
+
+  .product-carousel .product-carousel-prev:hover,
+  .product-carousel .product-carousel-next:hover {
+    transform: scale(1.06);
+  }
+
+  .product-carousel .product-carousel-prev {
+    left: -22px;
+  }
+
+  .product-carousel .product-carousel-next {
+    right: -22px;
+  }
+
+  .product-carousel .product-carousel-prev:disabled,
+  .product-carousel .product-carousel-next:disabled {
+    opacity: 0;
+    pointer-events: none;
+  }
+
+  .product-carousel .product-carousel-prev::after,
+  .product-carousel .product-carousel-next::after {
+    display: block;
+    width: 10px;
+    height: 10px;
+    margin: 0 auto;
+    border: solid #1d1d1f;
+    border-width: 0 2px 2px 0;
+    content: '';
+  }
+
+  .product-carousel .product-carousel-prev::after {
+    transform: translateX(2px) rotate(135deg);
+  }
+
+  .product-carousel .product-carousel-next::after {
+    transform: translateX(-2px) rotate(-45deg);
+  }
+}
+
+@media (width >= 1200px) {
+  .product-carousel .product-card {
+    flex-basis: calc((100% - 72px) / 4);
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .product-carousel .product-card,
+  .product-carousel .pc-media img,
+  .product-carousel .pc-buy,
+  .product-carousel .pc-learn::after {
+    transition: none;
+  }
+}

@@ -1,0 +1,305 @@
+/* Carousel v3 - kiểu LG: ảnh banner bo góc lớn, thanh tiến trình + cụm nút điều khiển kính mờ */
+
+.carousel {
+  --c-radius: var(--radius-l, 28px);
+
+  position: relative;
+  isolation: isolate;
+  overflow: hidden;
+  border-radius: var(--c-radius);
+  background: #e9e5dd;
+}
+
+.carousel .carousel-track {
+  display: flex;
+  margin: 0;
+  padding: 0;
+  overflow-x: auto;
+  list-style: none;
+  scroll-snap-type: x mandatory;
+  scrollbar-width: none;
+}
+
+.carousel .carousel-track::-webkit-scrollbar {
+  display: none;
+}
+
+.carousel .carousel-slide {
+  position: relative;
+  flex: 0 0 100%;
+  aspect-ratio: 4 / 3;
+  overflow: hidden;
+  scroll-snap-align: start;
+}
+
+.carousel.has-mobile-image .carousel-slide {
+  aspect-ratio: 4 / 5;
+}
+
+/* ảnh nền */
+.carousel .carousel-image,
+.carousel .carousel-image picture,
+.carousel .carousel-image img {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+}
+
+.carousel .carousel-image img {
+  border-radius: 0;
+  object-fit: cover;
+}
+
+/* hai ảnh: mobile dùng ảnh thứ hai, desktop dùng ảnh thứ nhất */
+.carousel .carousel-image .is-desktop {
+  display: none;
+}
+
+.carousel .carousel-image .is-mobile {
+  display: block;
+}
+
+/* cả slide bấm được */
+.carousel .carousel-slide-link {
+  position: absolute;
+  inset: 0;
+  z-index: 1;
+}
+
+/* nội dung chữ: mặc định hiện thành thẻ kính trên ảnh; dùng "Carousel (image-only)" để ẩn chữ khi ảnh banner đã có sẵn chữ (chữ vẫn có cho trình đọc màn hình) */
+.carousel .carousel-content {
+  position: absolute;
+  bottom: 56px;
+  left: 14px;
+  z-index: 2;
+  box-sizing: border-box;
+  max-width: min(440px, calc(100% - 28px));
+  padding: 18px 20px 20px;
+  border: 1px solid rgb(255 255 255 / 20%);
+  border-radius: 22px;
+  background: rgb(20 20 24 / 55%);
+  color: #fff;
+  -webkit-backdrop-filter: blur(24px) saturate(160%);
+  backdrop-filter: blur(24px) saturate(160%);
+}
+
+.carousel.image-only .carousel-content:not(:focus-within) {
+  width: 1px;
+  height: 1px;
+  padding: 0;
+  overflow: hidden;
+  border: 0;
+  clip-path: inset(50%);
+  white-space: nowrap;
+}
+
+.carousel .carousel-content h1,
+.carousel .carousel-content h2,
+.carousel .carousel-content h3 {
+  margin: 0 0 6px;
+  font-size: 22px;
+  letter-spacing: -0.01em;
+  line-height: 1.18;
+  text-align: left;
+}
+
+.carousel .carousel-content p {
+  margin: 0;
+  font-size: 14px;
+  line-height: 1.45;
+}
+
+.carousel .carousel-content p.button-container {
+  margin-top: 14px;
+}
+
+.carousel .carousel-content a:any-link:not(.button) {
+  color: #fff;
+}
+
+.carousel .carousel-content a.button:any-link {
+  display: inline-block;
+  margin: 0;
+  padding: 0.6em 1.5em;
+  border: 1px solid #fff;
+  border-radius: 999px;
+  background: #fff;
+  color: #1d1d1f;
+  font-size: 14px;
+  font-weight: 600;
+  text-decoration: none;
+}
+
+/* ---------- thanh tiến trình (trái) và cụm nút (phải) ---------- */
+.carousel .carousel-progress,
+.carousel .carousel-controls {
+  position: absolute;
+  bottom: 14px;
+  z-index: 3;
+  display: flex;
+  align-items: center;
+  padding: 2px 8px;
+  border-radius: 999px;
+  background: rgb(30 30 34 / 55%);
+  -webkit-backdrop-filter: blur(16px);
+  backdrop-filter: blur(16px);
+}
+
+.carousel .carousel-progress {
+  left: 14px;
+  gap: 4px;
+}
+
+.carousel .carousel-controls {
+  right: 14px;
+  gap: 2px;
+  padding: 2px 4px;
+}
+
+.carousel .carousel-seg {
+  position: relative;
+  width: 26px;
+  height: 28px;
+  margin: 0;
+  padding: 0;
+  border: 0;
+  background: none;
+  cursor: pointer;
+}
+
+.carousel .carousel-seg::before,
+.carousel .carousel-seg-fill {
+  position: absolute;
+  top: 50%;
+  left: 0;
+  height: 3px;
+  margin-top: -1.5px;
+  border-radius: 2px;
+  content: '';
+}
+
+.carousel .carousel-seg::before {
+  right: 0;
+  background: rgb(255 255 255 / 35%);
+}
+
+.carousel .carousel-seg-fill {
+  width: 0;
+  background: #fff;
+}
+
+.carousel .carousel-seg[aria-current='true'] .carousel-seg-fill {
+  animation: carousel-fill var(--carousel-autoplay, 6s) linear forwards;
+}
+
+.carousel.is-paused .carousel-seg-fill,
+.carousel.is-hover .carousel-seg-fill {
+  animation-play-state: paused;
+}
+
+/* đang tạm dừng: đoạn hiện tại hiển thị đầy để biết đang ở slide nào */
+.carousel.is-paused .carousel-seg[aria-current='true'] .carousel-seg-fill {
+  width: 100%;
+  animation: none;
+}
+
+@keyframes carousel-fill {
+  from { width: 0; }
+  to { width: 100%; }
+}
+
+.carousel .carousel-controls button {
+  display: grid;
+  place-items: center;
+  width: 32px;
+  height: 32px;
+  margin: 0;
+  padding: 0;
+  border: 0;
+  border-radius: 50%;
+  background: transparent;
+  color: #fff;
+  cursor: pointer;
+  transition: background 0.2s;
+}
+
+.carousel .carousel-controls button:hover {
+  background: rgb(255 255 255 / 20%);
+}
+
+.carousel button:focus-visible {
+  outline: 2px solid #fff;
+  outline-offset: -2px;
+}
+
+@media (width >= 600px) {
+  .carousel .carousel-slide,
+  .carousel.has-mobile-image .carousel-slide {
+    aspect-ratio: 16 / 9;
+  }
+}
+
+@media (width >= 900px) {
+  .carousel {
+    --c-radius: var(--radius-l, 32px);
+  }
+
+  .carousel .carousel-slide,
+  .carousel.has-mobile-image .carousel-slide {
+    aspect-ratio: 8 / 3;
+  }
+
+  .carousel .carousel-image .is-desktop {
+    display: block;
+  }
+
+  .carousel .carousel-image .is-mobile {
+    display: none;
+  }
+
+  .carousel .carousel-content {
+    bottom: 64px;
+    left: 32px;
+    max-width: 460px;
+    padding: 26px 30px 28px;
+    border-radius: 26px;
+  }
+
+  .carousel .carousel-content h1,
+  .carousel .carousel-content h2,
+  .carousel .carousel-content h3 {
+    margin-bottom: 8px;
+    font-size: 30px;
+  }
+
+  .carousel .carousel-content p {
+    font-size: 16px;
+  }
+
+  .carousel .carousel-progress,
+  .carousel .carousel-controls {
+    bottom: 20px;
+  }
+
+  .carousel .carousel-progress {
+    left: 24px;
+    gap: 6px;
+    padding: 2px 12px;
+  }
+
+  .carousel .carousel-seg {
+    width: 48px;
+  }
+
+  .carousel .carousel-controls {
+    right: 24px;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .carousel .carousel-seg[aria-current='true'] .carousel-seg-fill {
+    width: 100%;
+    animation: none;
+  }
+}

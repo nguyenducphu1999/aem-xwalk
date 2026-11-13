@@ -1,0 +1,96 @@
+/* Category tiles v3 - hàng icon tròn trắng căn giữa kiểu LG */
+
+.category-tiles ul {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: 24px 8px;
+  margin: 0;
+  padding: 0;
+  list-style: none;
+}
+
+.category-tiles .category-tile {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 12px;
+  color: #555;
+  text-align: center;
+  text-decoration: none;
+}
+
+.category-tiles .category-tile:hover {
+  color: var(--brand-color, #a50034);
+  text-decoration: none;
+}
+
+.category-tiles .category-tile-media {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  width: 60px;
+  height: 60px;
+  overflow: hidden;
+  border-radius: 50%;
+  background: #fff;
+  box-shadow: 0 2px 8px rgb(0 0 0 / 8%);
+  transition: transform 0.25s, box-shadow 0.25s;
+}
+
+.category-tiles .category-tile:hover .category-tile-media {
+  box-shadow: 0 8px 20px rgb(0 0 0 / 14%);
+  transform: translateY(-3px);
+}
+
+.category-tiles .category-tile-media picture {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  width: 100%;
+  height: 100%;
+}
+
+.category-tiles .category-tile-media img {
+  width: 50%;
+  height: 50%;
+  border-radius: 0;
+  object-fit: contain;
+}
+
+.category-tiles .category-tile-label {
+  max-width: 6.8em;
+  font-size: 13px;
+  font-weight: 400;
+  line-height: 1.4;
+}
+
+@media (width >= 600px) {
+  .category-tiles ul {
+    grid-template-columns: repeat(8, 1fr);
+  }
+}
+
+@media (width >= 900px) {
+  /* hàng căn giữa, mỗi ô rộng cố định như trang LG */
+  .category-tiles ul {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    gap: 28px 0;
+  }
+
+  .category-tiles li {
+    flex: 0 0 122px;
+  }
+
+  .category-tiles .category-tile-media {
+    width: 66px;
+    height: 66px;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .category-tiles .category-tile-media {
+    transition: none;
+  }
+}
